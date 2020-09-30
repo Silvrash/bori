@@ -13,3 +13,6 @@ stop:
 
 connect-db:
 	docker exec -it cassandra cqlsh
+
+migrate:
+	docker exec -it cassandra /bin/sh -c "cqlsh -f db_scripts/db.cql"
