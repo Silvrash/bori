@@ -17,16 +17,21 @@
 	},
 	"dependencies": {
 		"cassandra-driver": "^4.6.0",
-		"dotenv": "^8.2.0"
+		"chalk": "^4.1.0",
+		"commander": "^6.1.0",
+		"dotenv": "^8.2.0",
+		"figlet": "^1.5.0",
+		"uuid": "^8.3.0"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^8.2.0",
 		"@commitlint/config-conventional": "^8.2.0",
+		"@types/figlet": "^1.2.0",
+		"@types/uuid": "^8.3.0",
 		"cz-conventional-changelog": "^3.1.0",
 		"husky": "^4.2.3",
 		"jest": "^24.8.0",
 		"prettier": "^1.19.1",
-		"ts-jest": "^24.0.2",
 		"ts-node": "^8.2.0",
 		"tslint": "^5.20.1",
 		"tslint-config-prettier": "^1.18.0",
