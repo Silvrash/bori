@@ -3,8 +3,8 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"author": "Benjamin Arko Afrasah",
-  "license": "MIT",
-  "scripts": {
+	"license": "MIT",
+	"scripts": {
 		"start": "ts-node src",
 		"lint:fix": "tslint --config tslint.json --fix --project .",
 		"test": "jest --watch",
@@ -15,7 +15,10 @@
 	"bin": {
 		"bori": "./bori/index.js"
 	},
-	"dependencies": {},
+	"dependencies": {
+		"cassandra-driver": "^4.6.0",
+		"dotenv": "^8.2.0"
+	},
 	"devDependencies": {
 		"@commitlint/cli": "^8.2.0",
 		"@commitlint/config-conventional": "^8.2.0",
