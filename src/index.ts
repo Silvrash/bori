@@ -18,7 +18,6 @@ const main = async () => {
 		.parse(process.argv);
 
 	const db = getDatabaseClient();
-	await db.connect();
 
 	if (program.add) {
 		const organisation: Organisation = {
@@ -31,7 +30,8 @@ const main = async () => {
 		console.log(result);
 	} else if (program.find) {
 		const result = await service.getParents(db, program.find);
-		console.log(result.map(org => org.name).join(', '));
+		if (!result) console.log('No parents');
+		else console.log(result.map(org => org.name).join(', '));
 	} else {
 		program.outputHelp();
 	}

@@ -11,7 +11,7 @@ import { useQuery } from './queryBuilder';
 export const addOrganisation = async (
 	client: cass.Client,
 	org: Organisation,
-	parentId: string | undefined = undefined
+	parentId: string | undefined | null = undefined
 ) => {
 	let hierarchypath;
 
@@ -41,7 +41,7 @@ export const getOrganisation = async (
 	id: string
 ): Promise<Organisation | null> => {
 	const result = await useQuery(client, 'get-org', [id]);
-	if (result.length === 0) return null;
+	if (!result || result.length === 0) return null;
 	return result[0];
 };
 
@@ -52,7 +52,8 @@ export const getOrganisation = async (
  */
 export const getParents = async (client: cass.Client, orgId: string) => {
 	const org = await getOrganisation(client, orgId);
-	const parentIds = org!.hierarchypath!.split('$');
+	if (!org || !org.hierarchypath) return null;
+	const parentIds = org.hierarchypath.split('$');
 	const parents = await useQuery(client, 'get-orgs', parentIds);
 	return parents;
 };
