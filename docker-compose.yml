@@ -1,0 +1,14 @@
+version: "3.5"
+services:
+  cassandra:
+    image: cassandra:latest
+    container_name: cassandra
+    restart: always
+    volumes:
+      - ./db_scripts:/db_scripts
+    ports:
+      - "9042:9042"
+networks:
+  default:
+    external:
+      name: bori-net
