@@ -1,12 +1,17 @@
-app=app
+app=cassandras
 
 init:
 	docker network create bori-net
+	make start
+	make migrate
 logs:
 	docker  logs --tail 10 -f ${app}
 
 login:
 	docker exec -it ${app} `
+
+start:
+	docker-compose up -d
 
 stop:
 	docker-compose down
