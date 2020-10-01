@@ -6,5 +6,5 @@ CREATE TABLE IF NOT EXISTS organization (
     id text PRIMARY KEY,
     name text,
     date_added timestamp,
-    hierarchypath text
+    hierarchypath set<text>
 );

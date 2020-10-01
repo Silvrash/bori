@@ -39,7 +39,7 @@ This is the documentation for Blue Ocean Robotics Interview with Benjamin Arko A
 
 **Solution**
 
-My solution was to save every child or parent with its hierarchy tree. For example,
+My solution was to save every child with its hierarchy tree. For example,
 Considering a tree like this
 
 Let [] - represent a hierarchy tree for a node and ****(X) - represent hierarchy of X           
@@ -68,16 +68,13 @@ The simplest data model for this was to create a table `organisation` with these
 CREATE TABLE bori.organization (
     id text PRIMARY KEY,
     date_added timestamp,
-    hierarchypath text,
+    hierarchypath set<text>,
     name text
 );
 ```
 
 **Extra Features**
 This algorithm supports more than two children for a node
-
-**Limitations**
-There's no limitation on how far the ancestor tree can go but splitting up the hierarchy tree for the last child above 10^1000 will start slowing this algorithm down.
 
 **Run Tests**
 

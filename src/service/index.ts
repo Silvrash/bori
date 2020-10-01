@@ -22,8 +22,8 @@ export const addOrganisation = async (
 	 */
 	if (parentId) {
 		const parent = await getOrganisation(client, parentId);
-		if (parent!.hierarchypath) hierarchypath = `${parent!.hierarchypath || ''}$${parent!.id}`;
-		else hierarchypath = `${parent!.id}`;
+		if (parent!.hierarchypath) hierarchypath = [...(parent!.hierarchypath || []), parent!.id];
+		else hierarchypath = [parent!.id];
 	}
 	org.date_added = new Date();
 	await useQuery(client, 'add-org', [org.id, org.name, org.date_added, hierarchypath]);
@@ -53,7 +53,6 @@ export const getOrganisation = async (
 export const getParents = async (client: cass.Client, orgId: string) => {
 	const org = await getOrganisation(client, orgId);
 	if (!org || !org.hierarchypath) return null;
-	const parentIds = org.hierarchypath.split('$');
-	const parents = await useQuery(client, 'get-orgs', parentIds);
+	const parents = await useQuery(client, 'get-orgs', org.hierarchypath);
 	return parents;
 };
