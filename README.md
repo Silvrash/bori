@@ -33,9 +33,41 @@ This is the documentation for Blue Ocean Robotics Interview with Benjamin Arko A
     > node bori -h
     ```
 
+## Explanation of Algorithm
+   ![Question](./docs/question.png)
+
+
+**Solution**
+
+My solution was to save every child or parent with its hierarchy tree. For example,
+Considering a tree like this
+
+Let [] - represent a hierarchy tree for a node and (X) - represent hierarchy of X           
+
+            A[hierarchy: None] -    -- Root node
+        |               |
+        B[A]            C[A]        -- 2nd Generation
+    |           |
+    D[(B)$B]    E[(B)$B]            -- 3rd Generation
+    |
+    F[(D)$D]                        -- 4th Generation
+
+- Taking node `B`, it's parent is node `A`
+- Node `D`'s hierarchy is that of node `B` joined (`$`) with node B where the hierarchy of node `B` = A. This ends up as D = A$B
+- Node `F`'s  hierarchy is that of node `D`'s hierarchy joined (`$`) with node D. `F = [hierarchy of D] $ D` => `[hierarchy of B] $B$D` => `A$B$D`.
+- Hence the parents and grand parents are retrieved by splitting the hierarchy tree for node `F` by the `$` sign.
+- In the case of `F` splitting the hierarchy tree `A$B$D` becomes `[A, B, D]` which are the grandparents and parents for node `F`
+- Hence before an organisation is added, if it has a parent we get the hierarchy tree of the parent then add the parent to the hierarchy tree
+
+**Cassandra Data Model**
+
+The simplest data model for this was to create a table `organisation` with these fields: `id`, `name`, `date_added` and `hierarchypath`, where `hierarchypath` will be used to save the ancestor tree.
+
+
 **Run Tests**
 
     > yarn test
+
 
 ## How to use
 Below are some examples on its usage
