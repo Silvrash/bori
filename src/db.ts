@@ -26,11 +26,11 @@ export const getDatabaseClient = () => {
  * @param  {string} preparedQuery - query string
  * @param  {Array<string|number|boolean>} params? - query parameters
  */
-const runPreparedQuery = (
+export const runPreparedQuery = (
 	client: cass.Client,
 	preparedQuery: string,
 	params?: Array<string | number | boolean>
-) => {
+): any => {
 	return client.execute(preparedQuery, params, { prepare: true });
 };
 
